@@ -41,6 +41,8 @@ app.get("/", (req, res) => {
 });
 require("./app/routes/kategori.routes")(app);
 require("./app/routes/skincare.routes")(app);
+require("./app/routes/ingredients.routes")(app);
+require("./app/routes/collection.routes")(app);
 const PORT = process.env.PORT || 8081;
 app.listen(PORT, () => {
    console.log(`Server backend port ${PORT}.`);
