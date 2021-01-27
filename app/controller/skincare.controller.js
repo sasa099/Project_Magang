@@ -57,8 +57,16 @@ exports.findOne = (req, res) => {
  
 exports.update = (req, res) => {
  const id = req.params.id;
- 
- Skincare.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
+ const skincare2 = {
+  foto: req.files[0].filename,
+  nama: req.body.nama,
+  harga: req.body.harga,
+  takaran: req.body.takaran,
+  deskripsi: req.body.deskripsi,
+  loved: req.body.loved,
+  id_kategori: req.body.id_kategori,
+ };
+ Skincare.findByIdAndUpdate(id, skincare2, { useFindAndModify: false })
    .then((data) => {
      if (!data) {
        res.status(404).send({

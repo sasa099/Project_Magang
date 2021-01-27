@@ -45,7 +45,7 @@ module.exports = (app) => {
     
     router.get("/:id", skincares.findOne);
     
-    router.put("/:id", skincares.update);
+    router.put("/:id", upload.any(),skincares.update);
     
     router.delete("/:id", skincares.delete);
     
