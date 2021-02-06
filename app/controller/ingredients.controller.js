@@ -54,8 +54,12 @@ exports.findOne = (req, res) => {
  
 exports.update = (req, res) => {
  const id = req.params.id;
- 
- Ingredients.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
+ const ingredients2 = {
+  id_skincare: req.body.id_skincare,
+  logo: req.files[0].filename,
+  nama: req.body.nama,
+ };
+ Ingredients.findByIdAndUpdate(id, ingredients2, { useFindAndModify: false })
    .then((data) => {
      if (!data) {
        res.status(404).send({

@@ -3,12 +3,13 @@ module.exports = (mongoose) => {
   const Ingredients = mongoose.model(
     "ingredients",
     mongoose.Schema({
-  logo:String,
-  nama:String,
       id_skincare: {
     type: Schema.Types.ObjectId,
     ref: 'skincare',
  },
+  nama:String,
+  logo:String,
+  
     }, {
       timestamps: true
     })

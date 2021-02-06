@@ -45,7 +45,7 @@ module.exports = (app) => {
     
     router.get("/:id", ingredientss.findOne);
     
-    router.put("/:id", ingredientss.update);
+    router.put("/:id", upload.any(), ingredientss.update);
     
     router.delete("/:id", ingredientss.delete);
     
