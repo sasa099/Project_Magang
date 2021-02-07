@@ -3,8 +3,9 @@ module.exports = (mongoose) => {
   const Collection = mongoose.model(
     "collection",
     mongoose.Schema({
-      foto: String,
       nama: String,
+      foto: String,
+      
       
     }, {
       timestamps: true
