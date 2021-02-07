@@ -3,8 +3,9 @@ const Collection = db.collection;
  
 exports.create = (req, res) => {
  const collection = new Collection({
-  foto: req.files[0].filename,
   nama: req.body.nama,
+  foto: req.files[0].filename,
+  
   
   
  });
@@ -54,8 +55,11 @@ exports.findOne = (req, res) => {
  
 exports.update = (req, res) => {
  const id = req.params.id;
- 
- Collection.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
+ const collection2 = {
+  nama: req.body.nama,
+  foto: req.files[0].filename,
+ };
+ Collection.findByIdAndUpdate(id, collection2, { useFindAndModify: false })
    .then((data) => {
      if (!data) {
        res.status(404).send({
