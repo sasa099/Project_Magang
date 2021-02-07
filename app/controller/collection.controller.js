@@ -3,8 +3,9 @@ const Collection = db.collection;
  
 exports.create = (req, res) => {
  const collection = new Collection({
-  nama: req.body.nama,
   foto: req.files[0].filename,
+  nama: req.body.nama,
+  
   
  });
  
