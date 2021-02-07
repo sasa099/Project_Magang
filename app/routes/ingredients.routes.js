@@ -37,7 +37,7 @@ module.exports = (app) => {
                return callback(/*res.end('Only images are allowed')*/ null, false);
            }
            callback(null, true);
-       },
+       }, 
    });
    router.post("/", upload.any(), ingredientss.create);
 

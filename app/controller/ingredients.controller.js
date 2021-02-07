@@ -28,7 +28,7 @@ exports.findAll = (req, res) => {
    ? { nama: { $regex: new RegExp(nama), $options: "i" } }
    : {};
  
- ingredients.find(condition).populate('id_skincare')
+ Ingredients.find(condition).populate('id_skincare')
    .then((data) => {
      res.send(data);
    })
@@ -42,11 +42,12 @@ exports.findAll = (req, res) => {
 exports.findOne = (req, res) => {
  const id = req.params.id;
  
- ingredients.findById(id)
+ Ingredients.findById(id)
    .then((data) => {
      if (!data) res.status(404).send({ message: "Not found with id " + id });
      else res.send(data);
    })
+   
    .catch((err) => {
      res.status(500).send({ message: "Error retrieving with id=" + id });
    });
@@ -59,7 +60,7 @@ exports.update = (req, res) => {
   logo: req.files[0].filename,
   nama: req.body.nama,
  };
- ingredients.findByIdAndUpdate(id, ingredients2, { useFindAndModify: false })
+ Ingredients.findByIdAndUpdate(id, ingredients2, { useFindAndModify: false })
    .then((data) => {
      if (!data) {
        res.status(404).send({
