@@ -7,8 +7,9 @@ module.exports = (mongoose) => {
     type: Schema.Types.ObjectId,
     ref: 'skincare',
  },
+ logo:String,
   nama:String,
-  logo:String,
+  
   
     }, {
       timestamps: true
