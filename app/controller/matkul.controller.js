@@ -1,20 +1,20 @@
 const db = require("../models");
-const Kategori = db.kategori;
+const Matkul = db.matkul;
  
 exports.create = (req, res) => {
- const kategori = new Kategori({
-   nama: req.body.nama,
+ const matkul = new Matkul({
+  matakuliah: req.body.matakuliah,
  });
  
- // Save Kategori in the database
- kategori
-   .save(kategori)
+ // Save Matkul in the database
+ matkul
+   .save(matkul)
    .then((data) => {
      res.send(data);
    })
    .catch((err) => {
      res.status(500).send({
-       message: err.message || "Some error occurred while creating the Kategori.",
+       message: err.message || "Some error occurred while creating the Matkul.",
      });
    });
 };
@@ -23,9 +23,9 @@ exports.findAll = (req, res) => {
  const nama = req.query.nama;
  var condition = nama
    ? { nama: { $regex: new RegExp(nama), $options: "i" } }
-   : {};
+   : {}; 
  
- Kategori.find(condition)
+ Matkul.find(condition)
    .then((data) => {
      res.send(data);
    })
@@ -39,7 +39,7 @@ exports.findAll = (req, res) => {
 exports.findOne = (req, res) => {
  const id = req.params.id;
  
- Kategori.findById(id)
+ Matkul.findById(id)
    .then((data) => {
      if (!data) res.status(404).send({ message: "Not found with id " + id });
      else res.send(data);
@@ -52,38 +52,38 @@ exports.findOne = (req, res) => {
 exports.update = (req, res) => {
  const id = req.params.id;
  
- Kategori.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
+ Matkul.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
    .then((data) => {
      if (!data) {
        res.status(404).send({
-         message: `Cannot update Kategori with id=${id}. Maybe Kategori was not found!`,
+         message: `Cannot update Matkul with id=${id}. Maybe Matkul was not found!`,
        });
-     } else res.send({ message: "Kategori was updated successfully." });
+     } else res.send({ message: "Matkul was updated successfully." });
    })
    .catch((err) => {
      res.status(500).send({
-       message: "Error updating Kategori with id=" + id,
+       message: "Error updating Matkul with id=" + id,
      });
    });
 };
 exports.delete = (req, res) => {
  const id = req.params.id;
  
- Kategori.findByIdAndRemove(id)
+ Matkul.findByIdAndRemove(id)
    .then((data) => {
      if (!data) {
        res.status(404).send({
-         message: `Cannot delete Kategori with id=${id}. Maybe Kategori was not found!`,
+         message: `Cannot delete Matkul with id=${id}. Maybe Matkul was not found!`,
        });
      } else {
        res.send({
-         message: "Kategori was deleted successfully!",
+         message: "Matkul was deleted successfully!",
        });
      }
    })
    .catch((err) => {
      res.status(500).send({
-       message: "Could not delete Kategori with id=" + id,
+       message: "Could not delete Matkul with id=" + id,
      });
    });
 };

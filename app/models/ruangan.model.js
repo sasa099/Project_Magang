@@ -1,12 +1,12 @@
 module.exports = (mongoose) => {
-    const Kategori = mongoose.model(
-      "kategori",
+    const Ruangan = mongoose.model(
+      "ruangan",
       mongoose.Schema({
-        nama: String,
+        ruang: String,
       }, {
         timestamps: true
       })
     );
-     return Kategori;
+     return Ruangan;
   };
  

@@ -1,24 +1,29 @@
 const db = require("../models");
-const Collection = db.collection;
+const Absensi = db.absensi;
  
 exports.create = (req, res) => {
- const collection = new Collection({
-  nama: req.body.nama,
-  foto: req.files[0].filename,
-  
-  
-  
+ const absensi = new Absensi({
+  tanggal:req.body,
+  kelas:req.body.kelas, 
+  kode:req.body.kode, 
+  matakuliah: req.body.matakuliah,
+  jam:req.body.jam, 
+  jmljam:req.body.jmljam,
+  ruang:req.body.ruang,
+  judul:req.body.judul,
+  metode:req.body.metode,
+  keterangan:req.body.keterangan,    
  });
  
- // Save Collection in the database
- collection
-   .save(collection)
+ // Save Absensi in the database
+ absensi
+   .save(absensi)
    .then((data) => {
      res.send(data);
    })
    .catch((err) => {
      res.status(500).send({
-       message: err.message || "Some error occurred while creating the Collection.",
+       message: err.message || "Some error occurred while creating the Absensi.",
      });
    });
 };
@@ -27,9 +32,9 @@ exports.findAll = (req, res) => {
  const nama = req.query.nama;
  var condition = nama
    ? { nama: { $regex: new RegExp(nama), $options: "i" } }
-   : {};
+   : {}; 
  
- Collection.find(condition)
+ Absensi.find(condition)
    .then((data) => {
      res.send(data);
    })
@@ -43,7 +48,7 @@ exports.findAll = (req, res) => {
 exports.findOne = (req, res) => {
  const id = req.params.id;
  
- Collection.findById(id)
+ Absensi.findById(id)
    .then((data) => {
      if (!data) res.status(404).send({ message: "Not found with id " + id });
      else res.send(data);
@@ -55,42 +60,39 @@ exports.findOne = (req, res) => {
  
 exports.update = (req, res) => {
  const id = req.params.id;
- const collection2 = {
-  nama: req.body.nama,
-  foto: req.files[0].filename,
- };
- Collection.findByIdAndUpdate(id, collection2, { useFindAndModify: false })
+ 
+ Absensi.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
    .then((data) => {
      if (!data) {
        res.status(404).send({
-         message: `Cannot update Collection with id=${id}. Maybe Collection was not found!`,
+         message: `Cannot update Absensi with id=${id}. Maybe Absensi was not found!`,
        });
-     } else res.send({ message: "Collection was updated successfully." });
+     } else res.send({ message: "Absensi was updated successfully." });
    })
    .catch((err) => {
      res.status(500).send({
-       message: "Error updating Collection with id=" + id,
+       message: "Error updating Absensi with id=" + id,
      });
    });
 };
 exports.delete = (req, res) => {
  const id = req.params.id;
  
- Collection.findByIdAndRemove(id)
+ Absensi.findByIdAndRemove(id)
    .then((data) => {
      if (!data) {
        res.status(404).send({
-         message: `Cannot delete Collection with id=${id}. Maybe Collection was not found!`,
+         message: `Cannot delete Absensi with id=${id}. Maybe Absensi was not found!`,
        });
      } else {
        res.send({
-         message: "Collection was deleted successfully!",
+         message: "Absensi was deleted successfully!",
        });
      }
    })
    .catch((err) => {
      res.status(500).send({
-       message: "Could not delete Collection with id=" + id,
+       message: "Could not delete Absensi with id=" + id,
      });
    });
 };
