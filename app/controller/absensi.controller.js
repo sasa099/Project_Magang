@@ -3,7 +3,17 @@ const Absensi = db.absensi;
  
 exports.create = (req, res) => {
  const absensi = new Absensi({
-  tanggal:req.body,
+  tanggal:res.render('jadeTemplateName', { 
+    dateNow: function() {
+        var dateNow = new Date();
+        var dd = dateNow.getDate();
+        var monthSingleDigit = dateNow.getMonth() + 1,
+            mm = monthSingleDigit < 10 ? '0' + monthSingleDigit : monthSingleDigit;
+        var yy = dateNow.getFullYear().toString().substr(2);
+
+        return (dd + '/' + mm + '/' + yy);
+    } 
+}),
   kelas:req.body.kelas, 
   kode:req.body.kode, 
   matakuliah: req.body.matakuliah,
