@@ -3,7 +3,7 @@ const Kelas = db.kelas;
  
 exports.create = (req, res) => {
  const kelas = new Kelas({
-  kode:req.body.kode,
+  matakuliah:req.body.matakuliah,
   kelas:req.body.kelas,
  });
  

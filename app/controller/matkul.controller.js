@@ -3,6 +3,7 @@ const Matkul = db.matkul;
  
 exports.create = (req, res) => {
  const matkul = new Matkul({
+  kode : req.body.kode,
   matakuliah: req.body.matakuliah,
  });
  

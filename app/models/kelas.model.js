@@ -3,10 +3,7 @@ module.exports = (mongoose) => {
     const Kelas = mongoose.model(
       "kelas",
       mongoose.Schema({
-        kode: {
-          type: Schema.Types.ObjectId,
-          ref: 'matkul',
-      },
+        matakuliah:String,
         kelas:String,
       }, {
         timestamps: true
