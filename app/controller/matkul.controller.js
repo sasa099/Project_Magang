@@ -52,8 +52,11 @@ exports.findOne = (req, res) => {
  
 exports.update = (req, res) => {
  const id = req.params.id;
- 
- Matkul.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
+ const matkul2 ={
+ kode : req.body.kode,
+ matakuliah: req.body.matakuliah,
+ };
+ Matkul.findByIdAndUpdate(id,matkul2, { useFindAndModify: false })
    .then((data) => {
      if (!data) {
        res.status(404).send({
