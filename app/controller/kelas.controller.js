@@ -52,7 +52,7 @@ exports.findOne = (req, res) => {
 exports.update = (req, res) => {
  const id = req.params.id;
  const kelas2 = {
-  kode:req.body.kode,
+  matakuliah:req.body.matakuliah,
   kelas:req.body.kelas,
  };
 
