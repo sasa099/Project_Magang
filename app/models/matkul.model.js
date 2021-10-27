@@ -3,7 +3,7 @@ module.exports = (mongoose) => {
       "matkul",
       mongoose.Schema({
         kode: String,
-        matakuliah: String,
+        matakuliah:String,
       }, {
         timestamps: true
       })
