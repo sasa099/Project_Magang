@@ -26,7 +26,7 @@ exports.findAll = (req, res) => {
    ? { nama: { $regex: new RegExp(nama), $options: "i" } }
    : {}; 
  
- Matkul.find(condition)
+ Matkul.find(condition).populate("matakuliah")
    .then((data) => {
      res.send(data);
    })
@@ -52,10 +52,10 @@ exports.findOne = (req, res) => {
  
 exports.update = (req, res) => {
  const id = req.params.id;
- //const matkul2 ={
- //kode : req.body.kode,
- //matakuliah: req.body.matakuliah,
- //};
+ const matkul2 ={
+ kode : req.body.kode,
+ matakuliah: req.body.matakuliah,
+};
 
  Matkul.findByIdAndUpdate(id,matkul2, { useFindAndModify: false })
    .then((data) => {
