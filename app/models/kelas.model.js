@@ -3,7 +3,7 @@ module.exports = (mongoose) => {
     const Kelas = mongoose.model(
       "kelas",
       mongoose.Schema({
-        matakuliah:{
+        id_matakuliah:{
           type: Schema.Types.ObjectId,
           ref: 'matkul',
        },

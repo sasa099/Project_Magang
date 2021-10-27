@@ -3,7 +3,7 @@ const Kelas = db.kelas;
  
 exports.create = (req, res) => {
  const kelas = new Kelas({
-  matakuliah:req.body.matakuliah,
+  id_matakuliah:req.body.id_matakuliah,
   kelas:req.body.kelas,
  });
  
@@ -52,7 +52,7 @@ exports.findOne = (req, res) => {
 exports.update = (req, res) => {
  const id = req.params.id;
  const kelas2 = {
-  matakuliah:req.body.matakuliah,
+  id_matakuliah:req.body.id_matakuliah,
   kelas:req.body.kelas,
  };
 
