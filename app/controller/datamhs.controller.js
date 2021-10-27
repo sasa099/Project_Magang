@@ -4,7 +4,8 @@ const Datamhs = db.datamhs;
 exports.create = (req, res) => {
  const datamhs = new Datamhs({
   nim:req.body.nim,
-  nama:req.body.nama,
+  nama_depan:req.body.nama_depan,
+  nama_belakang:req.body.nama_belakang,
   prodi:req.body.prodi,
   email:req.body.email,
   alamat:req.body.alamat,
@@ -63,7 +64,8 @@ exports.update = (req, res) => {
   const id = req.params.id;
   const datamhs2 = {
   nim:req.body.nim,
-  nama:req.body.nama,
+  nama_depan:req.body.nama_depan,
+  nama_belakang:req.body.nama_belakang,
   prodi:req.body.prodi,
   email:req.body.email,
   alamat:req.body.alamat,

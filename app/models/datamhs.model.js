@@ -3,7 +3,8 @@ module.exports = (mongoose) => {
       "datamhs",
       mongoose.Schema({
         nim:String,
-        nama:String,
+        nama_depan:String,
+        nama_belakang:String,
         prodi:String,
         email:String,
         alamat:String,
