@@ -14,7 +14,7 @@ exports.create = (req, res) => {
   foto:req.files[0].filename,
   nik:req.body.nik,
   gender:req.body.gender,
-  kelas:req.body.gender,
+  kelas:req.body.kelas,
  });
  
  // Save Datamhs in the database
@@ -74,7 +74,7 @@ exports.update = (req, res) => {
   foto:req.files[0].filename,
   nik:req.body.nik,
   gender:req.body.gender,
-  kelas:req.body.gender,
+  kelas:req.body.kelas,
  };
  Datamhs.findByIdAndUpdate(id, datamhs2, { useFindAndModify: false })
    .then((data) => {
