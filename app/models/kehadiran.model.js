@@ -1,7 +1,6 @@
 module.exports = (mongoose) => {
     const Kehadiran = mongoose.model(
-      "kehadiran",
-      mongoose.Schema({
+      "kehadiran",mongoose.Schema({
         datamhs: String,
         matakuliah: String,
       }, {

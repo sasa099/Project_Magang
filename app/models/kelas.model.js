@@ -1,8 +1,7 @@
 const { Schema} = require("mongoose");
 module.exports = (mongoose) => {
     const Kelas = mongoose.model(
-      "kelas",
-      mongoose.Schema({
+      "kelas",mongoose.Schema({
         id_matakuliah:{
           type: Schema.Types.ObjectId,
           ref: 'matkul',

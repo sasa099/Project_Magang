@@ -1,7 +1,6 @@
 module.exports = (mongoose) => {
     const Matkul = mongoose.model(
-      "matkul",
-      mongoose.Schema({
+      "matkul",mongoose.Schema({
         kode: String,
         matakuliah:String,
       }, {

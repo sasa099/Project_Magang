@@ -1,7 +1,6 @@
 module.exports = (mongoose) => {
     const Datamhs = mongoose.model(
-      "datamhs",
-      mongoose.Schema({
+      "datamhs",mongoose.Schema({
         nim:String,
         nama_depan:String,
         nama_belakang:String,

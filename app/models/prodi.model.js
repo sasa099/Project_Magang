@@ -1,7 +1,6 @@
 module.exports = (mongoose) => {
     const Prodi = mongoose.model(
-      "prodi",
-      mongoose.Schema({
+      "prodi",mongoose.Schema({
         nama_prodi: String,
       }, {
         timestamps: true

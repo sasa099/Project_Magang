@@ -3,8 +3,12 @@ const Kehadiran = db.kehadiran;
  
 exports.create = (req, res) => {
  const kehadiran = new Kehadiran({
-  kehadiran:req.body.kehadiran,
-  matakuliah: req.body.matakuliah,
+  nim:req.body.nim,
+  nama:req.body.nama,
+  kelas:req.body.kelas,
+  prodi:req.body.prodi,
+  keterangan:req.body.keterangan,
+  tanggal:req.body.tanggal,
  });
  
  // Save Kehadiran in the database

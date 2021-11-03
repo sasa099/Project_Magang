@@ -1,7 +1,6 @@
 module.exports = (mongoose) => {
     const Ruangan = mongoose.model(
-      "ruangan",
-      mongoose.Schema({
+      "ruangan",mongoose.Schema({
         ruang: String,
       }, {
         timestamps: true
