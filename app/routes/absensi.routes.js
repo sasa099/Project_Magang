@@ -1,22 +1,22 @@
 module.exports = (app) => {
-    const kelas = require("../controller/kelas.controller.js");
+    const absensi = require("../controller/absensi.controller.js");
     
     var router = require("express").Router();
     
-    router.post("/", kelas.create);
+    router.post("/", absensi.create);
     
-    router.get("/", kelas.findAll);
+    router.get("/", absensi.findAll);
     
-    router.get("/:id", kelas.findOne);
+    router.get("/:id", absensi.findOne);
     
-    router.put("/:id", kelas.update);
+    router.put("/:id", absensi.update);
     
-    router.delete("/:id", kelas.delete);
+    router.delete("/:id", absensi.delete);
 
     router.get("/laporan", absensi.laporan);
 
     router.get("/detail", absensi.detail);
     
-    app.use("/api/kelas", router);
+    app.use("/api/absensi", router);
    };
    
