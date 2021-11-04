@@ -5,9 +5,9 @@ module.exports = (mongoose) => {
         id_matakuliah:[{
           type: Schema.Types.ObjectId,
           ref: 'matkul',
-       }],
-        kelas:String,
-      }, {
+       kelas:String,
+      }],
+    }, {
         timestamps: true
       })
     );
