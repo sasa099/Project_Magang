@@ -109,6 +109,7 @@ exports.delete = (req, res) => {
      });
    });
 };
+
 exports.detail = (req, res) => {
   if (req.query.kelas && req.query.matakuliah && req.query.datamhs && req.query.ruangan) {
     Absensi.aggregate([
