@@ -1,18 +1,18 @@
 module.exports = (app) => {
-    const absensi = require("../controller/absensi.controller.js");
+    const kehadiran = require("../controller/kehadiran.controller.js");
     
     var router = require("express").Router();
     
-    router.post("/", absensi.create);
+    router.post("/", kehadiran.create);
     
-    router.get("/", absensi.findAll);
+    router.get("/", kehadiran.findAll);
     
-    router.get("/:id", absensi.findOne);
+    router.get("/:id", kehadiran.findOne);
     
-    router.put("/:id", absensi.update);
+    router.put("/:id", kehadiran.update);
     
-    router.delete("/:id", absensi.delete);
+    router.delete("/:id", kehadiran.delete);
     
-    app.use("/api/absensi", router);
+    app.use("/api/kehadiran", router);
    };
    

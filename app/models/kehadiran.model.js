@@ -1,8 +1,12 @@
 module.exports = (mongoose) => {
     const Kehadiran = mongoose.model(
       "kehadiran",mongoose.Schema({
-        datamhs: String,
-        matakuliah: String,
+        nim:String,
+        nama:String,
+        kelas:String,
+        prodi:String,
+        keterangan:String,
+        tanggal:String,
       }, {
         timestamps: true
       })
