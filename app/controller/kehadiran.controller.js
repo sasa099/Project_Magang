@@ -5,8 +5,8 @@ exports.create = (req, res) => {
  const kehadiran = new Kehadiran({
   nim:req.body.nim,
   nama:req.body.nama,
-  kelas:req.body.kelas,
-  prodi:req.body.prodi,
+  id_kelas:req.body.id_kelas,
+  id_prodi:req.body.id_prodi,
   keterangan:req.body.keterangan,
   tanggal:req.body.tanggal,
  });
@@ -30,7 +30,7 @@ exports.findAll = (req, res) => {
    ? { nama: { $regex: new RegExp(nama), $options: "i" } }
    : {}; 
  
- Kehadiran.find(condition)
+ Kehadiran.find(condition).populate('id_kelas').populate('id_prodi')
    .then((data) => {
      res.send(data);
    })
@@ -54,7 +54,7 @@ exports.findOne = (req, res) => {
 };
  
 exports.update = (req, res) => {
- const id = req.params.id;
+ const id  = req.params.id;
  
  Kehadiran.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
    .then((data) => {
