@@ -26,7 +26,7 @@ exports.findAll = (req, res) => {
    ? { nama: { $regex: new RegExp(nama), $options: "i" } }
    : {}; 
  
- Kelas.find(condition).populate('id_matakuliah')
+ Kelas.find(condition).populate('id_matakuliah').populate('kelas')
    .then((data) => {
      res.send(data);
    })
