@@ -19,8 +19,6 @@ module.exports = (mongoose) => {
         kota:String,
         kecamatanmu:String,
         foto:String,
-        nik:String,
-        gender:String,
         kelas:String,
       }, {
         timestamps: true

@@ -20,10 +20,9 @@ exports.create = (req, res) => {
   kotamu:req.body.kota,
   kota:req.body.kota,
   kecamatanmu:req.body.kecamatanmu,
-  foto:req.files[0].filename,
-  nik:req.body.nik,
-  gender:req.body.gender,
   kelas:req.body.kelas,
+  foto:req.files[0].filename,
+  
  });
  
  // Save Datamhs in the database
@@ -89,10 +88,9 @@ exports.update = (req, res) => {
     kotamu:req.body.kota,
     kota:req.body.kota,
     kecamatanmu:req.body.kecamatanmu,
-    foto:req.files[0].filename,
-    nik:req.body.nik,
-    gender:req.body.gender,
     kelas:req.body.kelas,
+    foto:req.files[0].filename,
+    
  };
  Datamhs.findByIdAndUpdate(id, datamhs2, { useFindAndModify: false })
    .then((data) => {
