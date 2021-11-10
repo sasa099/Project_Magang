@@ -6,11 +6,11 @@ module.exports = (mongoose) => {
         nama:String,
         id_kelas:{
           type:Schema.Types.ObjectId,
-          ref: 'kelas',
+          ref:'kelas',
         },
         id_prodi:{
           type:Schema.Types.ObjectId,
-          ref: 'prodi',
+          ref:'prodi',
         },
         keterangan:String,
         tanggal:String,
