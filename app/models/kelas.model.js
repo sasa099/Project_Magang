@@ -12,5 +12,4 @@ module.exports = (mongoose) => {
       })
     );
      return Kelas;
-  };
- 
+  }
