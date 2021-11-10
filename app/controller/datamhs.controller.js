@@ -8,7 +8,7 @@ exports.create = (req, res) => {
   nama_depan:req.body.nama_depan,
   nama_belakang:req.body.nama_belakang,
   jenis_kelamin:req.body.jenis_kelamin,
-  prodi:req.body.prodi,
+  id_prodi:req.body.id_prodi,
   email:req.body.email,
   alamat:req.body.alamat,
   notelp:req.body.notelp,
@@ -20,7 +20,7 @@ exports.create = (req, res) => {
   kotamu:req.body.kotamu,
   kota:req.body.kota,
   kecamatanmu:req.body.kecamatanmu,
-  kelas:req.body.kelas,
+  id_kelas:req.body.id_kelas,
   foto:req.files[0].filename,
   
  });
@@ -44,7 +44,7 @@ exports.findAll = (req, res) => {
    ? { nama: { $regex: new RegExp(nama), $options: "i" } }
    : {}; 
  
- Datamhs.find(condition)
+ Datamhs.find(condition).populate('id_kelas').populate('id_prodi')
    .then((data) => {
      res.send(data);
    })
@@ -76,7 +76,7 @@ exports.update = (req, res) => {
     nama_depan:req.body.nama_depan,
     nama_belakang:req.body.nama_belakang,
     jenis_kelamin:req.body.jenis_kelamin,
-    prodi:req.body.prodi,
+    id_prodi:req.body.id_prodi,
     email:req.body.email,
     alamat:req.body.alamat,
     notelp:req.body.notelp,
@@ -88,7 +88,7 @@ exports.update = (req, res) => {
     kotamu:req.body.kotamu,
     kota:req.body.kota,
     kecamatanmu:req.body.kecamatanmu,
-    kelas:req.body.kelas,
+    id_kelas:req.body.id_kelas,
     foto:req.files[0].filename,
     
  };

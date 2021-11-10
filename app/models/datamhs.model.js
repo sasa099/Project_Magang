@@ -1,3 +1,4 @@
+const { Schema} = require("mongoose");
 module.exports = (mongoose) => {
     const Datamhs = mongoose.model(
       "datamhs",mongoose.Schema({
@@ -6,7 +7,10 @@ module.exports = (mongoose) => {
         nama_depan:String,
         nama_belakang:String,
         jenis_kelamin:String,
-        prodi:String,
+        id_prodi:{
+          type:Schema.Types.ObjectId,
+          ref:'prodi',
+        },
         email:String,
         alamat:String,
         notelp:String,
@@ -18,8 +22,12 @@ module.exports = (mongoose) => {
         kotamu:String,
         kota:String,
         kecamatanmu:String,
+        id_kelas:{
+          type:Schema.Types.ObjectId,
+          ref:'kelas',
+        },
         foto:String,
-        kelas:String,
+        
       }, {
         timestamps: true
       })
