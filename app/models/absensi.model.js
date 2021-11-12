@@ -18,8 +18,10 @@ module.exports = (mongoose) => {
           type: Schema.Types.ObjectId,
           ref: 'kelas',
        },
-        kode:String, 
-        matakuliah: String,
+        id_matakuliah:{
+          type: Schema.Types.ObjectId,
+          ref: 'matkul',
+       },
         jmljam:String,
         ruang:String,
         judul:String,
