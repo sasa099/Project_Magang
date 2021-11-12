@@ -12,7 +12,7 @@ module.exports = (mongoose) => {
           ref:'prodi',
         },
         email:String,
-        notelp:String,
+        noTelp:String,
         alamatOrtu:String,
         alamatmu:String,
         kodepos:String,
