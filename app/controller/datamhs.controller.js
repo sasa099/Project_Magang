@@ -91,8 +91,7 @@ exports.update = (req, res) => {
     kecamatanmu:req.body.kecamatanmu,
     kecamatan:req.body.kecamatan,
     id_kelas:req.body.id_kelas,
-    foto:req.files[0].filename,
-    
+    foto:req.files[0].filename,  
  };
  Datamhs.findByIdAndUpdate(id, datamhs2, { useFindAndModify: false })
    .then((data) => {
