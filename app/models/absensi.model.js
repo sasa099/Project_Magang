@@ -7,13 +7,7 @@ module.exports = (mongoose) => {
           masuk:String,
           keluar:String,
         },
-        absensi:[{
-          id_datamhs:{
-            type:Schema.Types.ObjectId,
-            ref:'datamhs'
-          },
-          keterangan:String,
-        }],
+        keterangan:String,
         id_kelas:{
           type: Schema.Types.ObjectId,
           ref: 'kelas',

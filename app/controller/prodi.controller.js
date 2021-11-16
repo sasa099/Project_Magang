@@ -8,7 +8,7 @@ exports.create = (req, res) => {
  
  // Save Prodi in the database
  Prodi.find({
-  prodi:req.body.prodi,
+  nama_prodi:req.body.nama_prodi,
 }).then((data)=>{console.log(data[0]);
  if(!data[0]){
  prodi
@@ -22,7 +22,7 @@ exports.create = (req, res) => {
      });
    });
   } else {
-    res.status(412).send({ message: "Kelas "+req.body.kelas + " Telah Terdaftar" });
+    res.status(412).send({ message: "Prodi "+ req.body.prodi + " Telah Terdaftar" });
   }
 }).catch((err) => {
   res.status(500).send({

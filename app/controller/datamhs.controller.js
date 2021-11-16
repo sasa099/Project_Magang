@@ -27,6 +27,10 @@ exports.create = (req, res) => {
  });
  
  // Save Datamhs in the database
+ Datamhs.find({
+  nim: req.body.nim,
+}).then((data) => {
+  if (!data.length > 0) {
  datamhs
    .save(datamhs)
    .then((data) => {
@@ -37,7 +41,14 @@ exports.create = (req, res) => {
        message: err.message || "Some error occurred while creating the Datamhs.",
      });
    });
+  } else {
+    res.status(412).send({
+      message: "NIM Mahasiswa " + "("+ req.body.nim + ")" + " Telah Terdaftar",
+    })
+  }
+});
 };
+
  
 exports.findAll = (req, res) => {
  const nama = req.query.nama;

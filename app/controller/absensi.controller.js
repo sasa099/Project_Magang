@@ -5,7 +5,6 @@ exports.create = (req, res) => {
  const absensi = new Absensi({
   tanggal:res.body.tanggal,
   'jam':req.body.jam,
-  'absensi':req.body.absensi,
   id_kelas:req.body.id_kelas,
   id_matakuliah:req.body.id_matakuliah, 
   jmljam:req.body.jmljam,
@@ -63,7 +62,6 @@ exports.update = (req, res) => {
  const absensi2 ={
   tanggal:res.body.tanggal,
   'jam':req.body.jam,
-  'absensi':req.body.absensi,
   id_kelas:req.body.id_kelas,
   id_matakuliah:req.body.id_matakuliah,
   jmljam:req.body.jmljam,
@@ -146,7 +144,7 @@ exports.detail = (req, res) => {
         },
         {
           $group: {
-            _id: { id_nama: "$absensi.id_datamhs", keterangan: "$absensi.keterangan" },
+            _id: { id_nama: "$absensi.id_nama", keterangan: "$absensi.keterangan" },
             kelas: { $first: "$id_kelas" },
             jumlah: { $sum: 1 },
           }

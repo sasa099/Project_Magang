@@ -8,7 +8,7 @@ exports.create = (req, res) => {
  
  // Save Ruangan in the database
  Ruangan.find({
-  ruangan:req.body.ruangan,
+  ruang:req.body.ruang,
 }).then((data)=>{console.log(data[0]);
  if(!data[0]){
  ruangan
@@ -22,7 +22,7 @@ exports.create = (req, res) => {
      });
    });
   } else {
-    res.status(412).send({ message: "Kelas "+req.body.kelas + " Telah Terdaftar" });
+    res.status(412).send({ message: "Ruangan "+ req.body.ruangan + " Telah Terdaftar" });
   }
 }).catch((err) => {
   res.status(500).send({
