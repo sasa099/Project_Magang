@@ -45,7 +45,7 @@ exports.findAll = (req, res) => {
    ? { nama: { $regex: new RegExp(nama), $options: "i" } }
    : {}; 
  
- Datamhs.find(condition).populate('id_kelas').populate('id_prodi')
+ Datamhs.find(condition)//.populate('id_kelas').populate('id_prodi')
    .then((data) => {
      res.send(data);
    })
@@ -59,7 +59,7 @@ exports.findAll = (req, res) => {
 exports.findOne = (req, res) => {
  const id = req.params.id;
  
- Datamhs.findById(id)
+ Datamhs.findById(id).populate('id_prodi').populate('id_kelas')
    .then((data) => {
      if (!data) res.status(404).send({ message: "Not found with id " + id });
      else res.send(data);
