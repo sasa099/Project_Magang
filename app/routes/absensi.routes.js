@@ -13,7 +13,7 @@ module.exports = (app) => {
     
     router.delete("/:id", absensi.delete);
 
-    router.get("/laporan", absensi.laporan);
+    //router.get("/laporan", absensi.laporan);
 
     router.get("/detail", absensi.detail);
     
