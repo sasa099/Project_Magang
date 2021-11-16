@@ -7,6 +7,10 @@ exports.create = (req, res) => {
  });
  
  // Save Ruangan in the database
+ Ruangan.find({
+  ruangan:req.body.ruangan,
+}).then((data)=>{console.log(data[0]);
+ if(!data[0]){
  ruangan
    .save(ruangan)
    .then((data) => {
@@ -17,7 +21,15 @@ exports.create = (req, res) => {
        message: err.message || "Some error occurred while creating the Ruangan.",
      });
    });
-};
+  } else {
+    res.status(412).send({ message: "Kelas "+req.body.kelas + " Telah Terdaftar" });
+  }
+}).catch((err) => {
+  res.status(500).send({
+    message: err.message || "Some error occurred while retrieving.",
+  });
+});
+}
  
 exports.findAll = (req, res) => {
  const nama = req.query.nama;

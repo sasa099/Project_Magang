@@ -9,7 +9,7 @@ exports.create = (req, res) => {
   id_kelas:req.body.id_kelas,
   id_matakuliah:req.body.id_matakuliah, 
   jmljam:req.body.jmljam,
-  ruang:req.body.ruang,
+  id_ruang:req.body.id_ruang,
   judul:req.body.judul,
   metode:req.body.metode,
   keterangan:req.body.keterangan,    
@@ -67,7 +67,7 @@ exports.update = (req, res) => {
   id_kelas:req.body.id_kelas,
   id_matakuliah:req.body.id_matakuliah,
   jmljam:req.body.jmljam,
-  ruang:req.body.ruang,
+  id_ruang:req.body.id_ruang,
   judul:req.body.judul,
   metode:req.body.metode,
   keterangan:req.body.keterangan,     
@@ -109,7 +109,7 @@ exports.delete = (req, res) => {
 };
 
 exports.detail = (req, res) => {
-  if (req.query.kelas && req.query.matakuliah && req.query.datamhs && req.query.ruangan) {
+  if (req.query.kelas && req.query.matakuliah && req.query.datamhs) {
     Absensi.aggregate([
       {
         $match: {
@@ -122,7 +122,7 @@ exports.detail = (req, res) => {
       },
       {
         $group: {
-          _id: { id_nama: "$absensi.id_nama" },
+          _id: { id_nama: "$absensi.id_datamhs" },
           kelas: { $first: "$id_kelas" },
           jumlah: { $sum: 1 },
         }
@@ -146,13 +146,13 @@ exports.detail = (req, res) => {
         },
         {
           $group: {
-            _id: { id_nama: "$absensi.id_nama", keterangan: "$absensi.keterangan" },
+            _id: { id_nama: "$absensi.id_datamhs", keterangan: "$absensi.keterangan" },
             kelas: { $first: "$id_kelas" },
             jumlah: { $sum: 1 },
           }
         },{
           $match: {
-            "_id.id_nama": mongoose.Types.ObjectId(req.query.datamhs),
+            "_id.id_datamhs": mongoose.Types.ObjectId(req.query.datamhs),
           }
         },
         {
@@ -184,7 +184,7 @@ exports.laporan = (req, res) => {
       },
       {
         $group: {
-          _id: { id_mahasiswa: "$absensi.id_mahasiswa" },
+          _id: { id_mahasiswa: "$absensi.id_datamhs" },
           kelas: { $first: "$id_kelas" },
           jumlah: { $sum: 1 },
         }
@@ -228,7 +228,7 @@ exports.laporan = (req, res) => {
         res.send(data1);
       });
     });
-
+ 
   } else {
     Absensi.aggregate([
       {

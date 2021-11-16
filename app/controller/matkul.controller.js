@@ -8,6 +8,10 @@ exports.create = (req, res) => {
  });
  
  // Save Matkul in the database
+ Matkul.find({
+  matkul:req.body.matkul,
+}).then((data)=>{console.log(data[0]);
+ if(!data[0]){
  matkul
    .save(matkul)
    .then((data) => {
@@ -16,9 +20,17 @@ exports.create = (req, res) => {
    .catch((err) => {
      res.status(500).send({
        message: err.message || "Some error occurred while creating the Matkul.",
-     });
+      });
    });
-};
+  } else {
+    res.status(412).send({ message: "Matkul "+req.body.matkul + " Telah Terdaftar" });
+  }
+}).catch((err) => {
+  res.status(500).send({
+    message: err.message || "Some error occurred while retrieving.",
+  });
+});
+}
  
 exports.findAll = (req, res) => {
  const nama = req.query.nama;

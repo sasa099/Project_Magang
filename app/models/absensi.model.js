@@ -23,7 +23,10 @@ module.exports = (mongoose) => {
           ref: 'matkul',
        },
         jmljam:String,
-        ruang:String,
+        id_ruang:{
+          type: Schema.Types.ObjectId,
+          ref: 'ruangan',
+       },
         judul:String,
         metode:String,
       }, {
