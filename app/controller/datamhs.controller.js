@@ -30,7 +30,7 @@ exports.create = (req, res) => {
  Datamhs.find({
   nim: req.body.nim,
 }).then((data) => {
-  if (!data.length > 0) {
+  if (!data[0]) {
  datamhs
    .save(datamhs)
    .then((data) => {
@@ -42,10 +42,12 @@ exports.create = (req, res) => {
      });
    });
   } else {
-    res.status(412).send({
-      message: "NIM Mahasiswa " + "("+ req.body.nim + ")" + " Telah Terdaftar",
-    })
+    res.status(412).send({ message: "Nim "+ req.body.nim + " Telah Terdaftar" });
   }
+}).catch((err) => {
+  res.status(500).send({
+    message: err.message || "Some error occurred while retrieving.",
+  });
 });
 };
 
