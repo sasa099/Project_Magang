@@ -45,7 +45,7 @@ exports.findAll = (req, res) => {
    ? { nama: { $regex: new RegExp(nama), $options: "i" } }
    : {}; 
  
- Datamhs.find(condition)//.populate('id_kelas').populate('id_prodi')
+ Datamhs.find(condition).populate('id_kelas').populate('id_prodi')
    .then((data) => {
      res.send(data);
    })
