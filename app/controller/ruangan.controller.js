@@ -22,7 +22,7 @@ exports.create = (req, res) => {
      });
    });
   } else {
-    res.status(412).send({ message: "Ruangan "+ req.body.ruangan + " Telah Terdaftar" });
+    res.status(412).send({ message: "Ruangan "+ req.body.ruang + " Telah Terdaftar" });
   }
 }).catch((err) => {
   res.status(500).send({

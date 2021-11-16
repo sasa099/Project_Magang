@@ -9,7 +9,7 @@ exports.create = (req, res) => {
  
  // Save Matkul in the database
  Matkul.find({
-  matakuliah:req.body.matkuliah,
+  matakuliah:req.body.matakuliah,
 }).then((data)=>{console.log(data[0]);
  if(!data[0]){
  matkul
@@ -23,7 +23,7 @@ exports.create = (req, res) => {
       });
    });
   } else {
-    res.status(412).send({ message: "Matakuliah "+ req.body.matkul + " Telah Terdaftar" });
+    res.status(412).send({ message: "Matakuliah "+ req.body.matakuliah + " Telah Terdaftar" });
   }
 }).catch((err) => {
   res.status(500).send({
