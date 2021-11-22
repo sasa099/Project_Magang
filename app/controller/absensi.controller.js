@@ -115,7 +115,7 @@ exports.detail = (req, res) => {
           id_matakuliah: mongoose.Types.ObjectId(req.query.matakuliah)
         }
       },
-      {
+      {  
         $unwind: "$absensi",
       },
       {
@@ -128,7 +128,7 @@ exports.detail = (req, res) => {
       {
         $project: {
           total: "$jumlah",
-          //percent: { $multiply: [{ $divide: ["$jumlah", "$jumlah"] }, 100] },
+          percent: { $multiply: [{ $divide: ["$jumlah", "$jumlah"] }, 100] },
         }
       },
     ]).then((data) => {

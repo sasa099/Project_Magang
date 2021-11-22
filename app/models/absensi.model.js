@@ -3,10 +3,7 @@ module.exports = (mongoose) => {
     const Absensi = mongoose.model(
       "absensi",mongoose.Schema({
         tanggal:String,
-        jam:{
-          masuk:String,
-          keluar:String,
-        },
+        jam:String,
         keterangan:String,
         id_kelas:{
           type: Schema.Types.ObjectId,
@@ -22,7 +19,7 @@ module.exports = (mongoose) => {
           ref: 'ruangan',
        },
         judul:String,
-        metode:String,
+        metode:String, 
       }, {
         timestamps: true
       })
