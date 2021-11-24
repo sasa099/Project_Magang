@@ -33,7 +33,7 @@ exports.findAll = (req, res) => {
    ? { nama: { $regex: new RegExp(nama), $options: "i" } }
    : {}; 
  
- Absensi.find(condition)
+ Absensi.find(condition).populate('id_kelas').populate('id_matakuliah').populate('id_ruang')
    .then((data) => {
      res.send(data);
    })

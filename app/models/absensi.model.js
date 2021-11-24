@@ -1,4 +1,4 @@
-const { Schema} = require("mongoose");
+const {Schema} = require("mongoose");
 module.exports = (mongoose) => {
     const Absensi = mongoose.model(
       "absensi",mongoose.Schema({
@@ -7,16 +7,16 @@ module.exports = (mongoose) => {
         keterangan:String,
         id_kelas:{
           type: Schema.Types.ObjectId,
-          ref: 'kelas',
+          ref:'kelas',
        },
         id_matakuliah:{
           type: Schema.Types.ObjectId,
-          ref: 'matkul',
+          ref:'matkul',
        },
         jmljam:String,
         id_ruang:{
           type: Schema.Types.ObjectId,
-          ref: 'ruangan',
+          ref:'ruangan',
        },
         judul:String,
         metode:String, 
