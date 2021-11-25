@@ -15,7 +15,7 @@ module.exports = (app) => {
 
     //router.get("/laporan", absensi.laporan);
 
-    router.get("/detail", absensi.detail);
+    //router.get("/detail", absensi.detail);
     
     app.use("/api/absensi", router);
    };

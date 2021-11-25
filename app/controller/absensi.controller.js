@@ -106,67 +106,67 @@ exports.delete = (req, res) => {
    });
 };
 
-exports.detail = (req, res) => {
-  if (req.query.kelas && req.query.matakuliah && req.query.datamhs) {
-    Absensi.aggregate([
-      {
-        $match: {
-          id_kelas: mongoose.Types.ObjectId(req.query.kelas),
-          id_matakuliah: mongoose.Types.ObjectId(req.query.matakuliah)
-        }
-      },
-      {  
-        $unwind: "$absensi",
-      },
-      {
-        $group: {
-          _id: { id_nama: "$absensi.id_nama" },
-          kelas: { $first: "$id_kelas" },
-          jumlah: { $sum: 1 },
-        }
-      },
-      {
-        $project: {
-          total: "$jumlah",
-          percent: { $multiply: [{ $divide: ["$jumlah", "$jumlah"] }, 100] },
-        }
-      },
-    ]).then((data) => {
-      Absensi.aggregate([
-        {
-          $match: {
-            id_kelas: mongoose.Types.ObjectId(req.query.kelas),
-            id_matakuliah: mongoose.Types.ObjectId(req.query.matakuliah),
-          }
-        },
-        {
-          $unwind: "$absensi",
-        },
-        {
-          $group: {
-            _id: { id_nama: "$absensi.id_nama", keterangan: "$absensi.keterangan" },
-            kelas: { $first: "$id_kelas" },
-            jumlah: { $sum: 1 },
-          }
-        },{
-          $match: {
-            "_id.id_datamhs": mongoose.Types.ObjectId(req.query.datamhs),
-          }
-        },
-        {
-          $project: {
-            _id: 1,
-            kelas: 1,
-            percent: { $multiply: [{ $divide: ["$jumlah", data[0].total] }, 100] },
-          }
-        },
-      ]).then((data1) => {
-        res.send(data1);
-      });
-    });
+// exports.detail = (req, res) => {
+//   if (req.query.kelas && req.query.matakuliah && req.query.datamhs) {
+//     Absensi.aggregate([
+//       {
+//         $match: {
+//           id_kelas: mongoose.Types.ObjectId(req.query.kelas),
+//           id_matakuliah: mongoose.Types.ObjectId(req.query.matakuliah)
+//         }
+//       },
+//       {  
+//         $unwind: "$absensi",
+//       },
+//       {
+//         $group: {
+//           _id: { id_nama: "$absensi.id_nama" },
+//           kelas: { $first: "$id_kelas" },
+//           jumlah: { $sum: 1 },
+//         }
+//       },
+//       {
+//         $project: {
+//           total: "$jumlah",
+//           percent: { $multiply: [{ $divide: ["$jumlah", "$jumlah"] }, 100] },
+//         }
+//       },
+//     ]).then((data) => {
+//       Absensi.aggregate([
+//         {
+//           $match: {
+//             id_kelas: mongoose.Types.ObjectId(req.query.kelas),
+//             id_matakuliah: mongoose.Types.ObjectId(req.query.matakuliah),
+//           }
+//         },
+//         {
+//           $unwind: "$absensi",
+//         },
+//         {
+//           $group: {
+//             _id: { id_nama: "$absensi.id_nama", keterangan: "$absensi.keterangan" },
+//             kelas: { $first: "$id_kelas" },
+//             jumlah: { $sum: 1 },
+//           }
+//         },{
+//           $match: {
+//             "_id.id_datamhs": mongoose.Types.ObjectId(req.query.datamhs),
+//           }
+//         },
+//         {
+//           $project: {
+//             _id: 1,
+//             kelas: 1,
+//             percent: { $multiply: [{ $divide: ["$jumlah", data[0].total] }, 100] },
+//           }
+//         },
+//       ]).then((data1) => {
+//         res.send(data1);
+//       });
+//     });
 
-  }
-}
+//   }
+// }
 
 // exports.laporan = (req, res) => {
 //   if (req.query.kelas && req.query.matakuliah) {

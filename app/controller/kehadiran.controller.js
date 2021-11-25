@@ -99,7 +99,179 @@ exports.delete = (req, res) => {
      });
    });
 };
- 
+
+exports.detail = (req, res) => {
+  if (req.query.kelas && req.query.matakuliah && req.query.datamhs) {
+    Absensi.aggregate([
+      {
+        $match: {
+          id_kelas: mongoose.Types.ObjectId(req.query.kelas),
+          id_matakuliah: mongoose.Types.ObjectId(req.query.matakuliah)
+        }
+      },
+      {  
+        $unwind: "$kehadiran",
+      },
+      {
+        $group: {
+          _id: { id_nama: "$kehadiran.id_nama" },
+          kelas: { $first: "$id_kelas" },
+          jumlah: { $sum: 1 },
+        }
+      },
+      {
+        $project: {
+          total: "$jumlah",
+          percent: { $multiply: [{ $divide: ["$jumlah", "$jumlah"] }, 100] },
+        }
+      },
+    ]).then((data) => {
+      Absensi.aggregate([
+        {
+          $match: {
+            id_kelas: mongoose.Types.ObjectId(req.query.kelas),
+            id_matakuliah: mongoose.Types.ObjectId(req.query.matakuliah),
+          }
+        },
+        {
+          $unwind: "$kehadiran",
+        },
+        {
+          $group: {
+            _id: { id_nama: "$kehadiran.id_nama", keterangan: "$kehadiran.keterangan" },
+            kelas: { $first: "$id_kelas" },
+            jumlah: { $sum: 1 },
+          }
+        },{
+          $match: {
+            "_id.id_datamhs": mongoose.Types.ObjectId(req.query.datamhs),
+          }
+        },
+        {
+          $project: {
+            _id: 1,
+            kelas: 1,
+            percent: { $multiply: [{ $divide: ["$jumlah", data[0].total] }, 100] },
+          }
+        },
+      ]).then((data1) => {
+        res.send(data1);
+      });
+    });
+
+  }
+}
+
+// exports.laporan = (req, res) => {
+//   if (req.query.kelas && req.query.matakuliah) {
+//     Absensi.aggregate([
+//       {
+//         $match: {
+//           id_kelas: mongoose.Types.ObjectId(req.query.kelas),
+//           id_matakuliah: mongoose.Types.ObjectId(req.query.matakuliah)
+//         }
+//       },
+//       {
+//         $unwind: "$absensi",
+//       },
+//       {
+//         $group: {
+//           _id: { id_mahasiswa: "$absensi.id_mahasiswa" },
+//           kelas: { $first: "$id_kelas" },
+//           jumlah: { $sum: 1 },
+//         }
+//       },
+//       {
+//         $project: {
+//           total: "$jumlah",
+//           //percent: { $multiply: [{ $divide: ["$jumlah", "$jumlah"] }, 100] },
+//         }
+//       },
+//     ]).then((data) => {
+//       Absensi.aggregate([
+
+//         {
+//           $match: {
+//             id_kelas: mongoose.Types.ObjectId(req.query.kelas),
+//             id_matakuliah: mongoose.Types.ObjectId(req.query.matakuliah),
+//           }
+//         },
+//         {
+//           $unwind: "$absensi",
+//         },
+//         {
+//           $group: {
+//             _id: { id_mahasiswa: "$absensi.id_mahasiswa", keterangan: "$absensi.keterangan" },
+//             kelas: { $first: "$id_kelas" },
+//             matakuliah: { $first: "$id_matakuliah" },
+//             dosen: {$first: "$id_dosen"},
+//             mahasiswa: { $first: "$absensi.id_mahasiswa" },
+//             keterangan: { $first: "$absensi.keterangan" },
+//             jumlah: { $sum: 1 },
+//           }
+//         }, {
+//           $match: {
+//             "_id.keterangan": "Hadir",
+//           }
+//         },
+//         {
+//           $project: {
+//             kelas: 1,
+//             matakuliah: 1,
+//             mahasiswa: 1,
+//             dosen: 1,
+//             keterangan: 1,
+//             percent: { $multiply: [{ $divide: ["$jumlah", data[0].total] }, 100] },
+//           }
+//         }, {
+//           $lookup: {
+//             from: "mahasiswas",
+//             localField: "mahasiswa",
+//             foreignField: "_id",
+//             as: "mahasiswa"
+//           }
+//         },
+//         {
+//           $lookup: {
+//             from: "kelas",
+//             localField: "kelas",
+//             foreignField: "_id",
+//             as: "kelas"
+//           }
+//         },
+//         {
+//           $lookup: {
+//             from: "dosens",
+//             localField: "dosen",
+//             foreignField: "_id",
+//             as: "dosen"
+//           }
+//         },
+//         {
+//           $lookup: {
+//             from: "matakuliahs",
+//             localField: "matakuliah",
+//             foreignField: "_id",
+//             as: "matakuliah"
+//           }
+//         },
+//       ]).then((data1) => {
+//         //res.send(data1);
+//         if (!data1) {
+//           res.status(503).send({
+//             message: "id_matakuliah or id_kelas was not found!"
+//           });
+//         }else{
+//           res.send(data1);
+//         }
+//       });
+//     }).catch((err)=>{
+//       res.status(500).send({
+//         message: "id_matakuliah or id_kelas not Found!"
+//       });
+//     });
+//   }
+// };
 exports.deleteAll = (req, res) => {};
  
 exports.findAllPublished = (req, res) => {};
