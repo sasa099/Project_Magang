@@ -6,8 +6,8 @@ exports.create = (req, res) => {
   tanggal:req.body.tanggal,
   'jam':req.body.jam,
   'absensi':req.body.absensi,
-  //nim:req.body.nim,
-  //nama:req.body.nama,
+  nim:req.body.nim,
+  nama:req.body.nama,
   id_kelas:req.body.id_kelas,
   id_prodi:req.body.id_prodi,
   id_matakuliah:req.body.id_matakuliah, 
@@ -63,21 +63,21 @@ exports.findOne = (req, res) => {
  
 exports.update = (req, res) => {
  const id = req.params.id;
-//  const absensi2 ={
-//   tanggal:req.body.tanggal,
-//   'jam':req.body.jam,
-//   'absensi':req.body.absensi,
-//   nim:req.body.nim,
-//   nama:req.body.nama,
-//   id_kelas:req.body.id_kelas,
-//   id_prodi:req.body.id_prodi,
-//   id_matakuliah:req.body.id_matakuliah, 
-//   jmljam:req.body.jmljam,
-//   id_ruang:req.body.id_ruang,
-//   judul:req.body.judul,
-//   metode:req.body.metode,
-//   keterangan:req.body.keterangan,         
-//  }
+ const absensi2 ={
+  tanggal:req.body.tanggal,
+  'jam':req.body.jam,
+  'absensi':req.body.absensi,
+  nim:req.body.nim,
+  nama:req.body.nama,
+  id_kelas:req.body.id_kelas,
+  id_prodi:req.body.id_prodi,
+  id_matakuliah:req.body.id_matakuliah, 
+  jmljam:req.body.jmljam,
+  id_ruang:req.body.id_ruang,
+  judul:req.body.judul,
+  metode:req.body.metode,
+  //keterangan:req.body.keterangan,         
+ }
  Absensi.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
    .then((data) => {
      if (!data) {

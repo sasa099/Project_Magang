@@ -55,14 +55,14 @@ exports.findOne = (req, res) => {
  
 exports.update = (req, res) => {
  const id  = req.params.id;
- const kehadiran2 ={
-  nim:req.body.nim,
-  nama:req.body.nama,
-  id_kelas:req.body.id_kelas,
-  id_prodi:req.body.id_prodi,
-  keterangan:req.body.keterangan,
-  tanggal:req.body.tanggal,
- }
+//  const kehadiran2 ={
+//   nim:req.body.nim,
+//   nama:req.body.nama,
+//   id_kelas:req.body.id_kelas,
+//   id_prodi:req.body.id_prodi,
+//   keterangan:req.body.keterangan,
+//   tanggal:req.body.tanggal,
+//  }
  
  Kehadiran.findByIdAndUpdate(id, kehadiran2, { useFindAndModify: false })
    .then((data) => {
