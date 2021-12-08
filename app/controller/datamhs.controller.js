@@ -106,6 +106,10 @@ exports.update = (req, res) => {
     id_kelas:req.body.id_kelas,
     foto:req.files[0].filename,  
  };
+ Datamhs.find({
+  nim: req.body.nim,
+}).then((data) => {
+  if (!data[0]) {
  Datamhs.findByIdAndUpdate(id, datamhs2, { useFindAndModify: false })
    .then((data) => {
      if (!data) {
@@ -119,6 +123,14 @@ exports.update = (req, res) => {
        message: "Error updating Datamhs with id=" + id,
      });
    });
+  } else {
+    res.status(412).send({ message: "Nim "+ req.body.nim + " Telah Terdaftar" });
+  }
+}).catch((err) => {
+  res.status(500).send({
+    message: err.message || "Some error occurred while retrieving.",
+  });
+});
 };
 exports.delete = (req, res) => {
  const id = req.params.id;

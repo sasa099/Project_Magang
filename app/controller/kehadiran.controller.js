@@ -43,7 +43,7 @@ exports.findAll = (req, res) => {
 exports.findOne = (req, res) => {
  const id = req.params.id;
  
- Kehadiran.findById(id)
+ Kehadiran.findById(id).populate('id_kelas').populate('id_prodi')
    .then((data) => {
      if (!data) res.status(404).send({ message: "Not found with id " + id });
      else res.send(data);

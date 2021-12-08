@@ -67,7 +67,11 @@ exports.update = (req, res) => {
   id_matakuliah:req.body.id_matakuliah,
   kelas:req.body.kelas,
  };
-
+ 
+ Kelas.find({
+  kelas:req.body.kelas,
+}).then((data)=>{console.log(data[0]);
+ if(!data[0]){
  Kelas.findByIdAndUpdate(id,kelas2, { useFindAndModify: false })
    .then((data) => {
      if (!data) {
@@ -81,6 +85,14 @@ exports.update = (req, res) => {
        message: "Error updating Kelas with id=" + id,
      });
    });
+  } else {
+    res.status(412).send({ message: "Kelas "+req.body.kelas + " Telah Terdaftar" });
+  }
+}).catch((err) => {
+  res.status(500).send({
+    message: err.message || "Some error occurred while retrieving.",
+  });
+});
 };
 exports.delete = (req, res) => {
  const id = req.params.id;

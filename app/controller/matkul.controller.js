@@ -69,6 +69,10 @@ exports.update = (req, res) => {
  matakuliah: req.body.matakuliah,
 };
 
+Matkul.find({
+  matakuliah:req.body.matakuliah,
+}).then((data)=>{console.log(data[0]);
+ if(!data[0]){
  Matkul.findByIdAndUpdate(id,matkul2, { useFindAndModify: false })
    .then((data) => {
      if (!data) {
@@ -82,6 +86,14 @@ exports.update = (req, res) => {
        message: "Error updating Matkul with id=" + id,
      });
    });
+  } else {
+    res.status(412).send({ message: "Matakuliah "+ req.body.matakuliah + " Telah Terdaftar" });
+  }
+}).catch((err) => {
+  res.status(500).send({
+    message: err.message || "Some error occurred while retrieving.",
+  });
+});
 };
 exports.delete = (req, res) => {
  const id = req.params.id;
