@@ -10,18 +10,16 @@ module.exports = (mongoose) => {
             ref:'datamhs',
          },
        }],
-       },{
-        nim:String,
-        nama:String,
-        id_prodi:{
-          type: Schema.Types.ObjectId,
-          ref:'prodi',
-        },
-        //keterangan:String,
+        // nim:String,
+        // nama:String,
         id_kelas:{
           type: Schema.Types.ObjectId,
           ref:'kelas',
        },
+        id_prodi:{
+          type: Schema.Types.ObjectId,
+          ref:'prodi',
+        },
         id_matakuliah:{
           type: Schema.Types.ObjectId,
           ref:'matkul',
