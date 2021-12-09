@@ -4,7 +4,7 @@ const Absensi = db.absensi;
 exports.create = (req, res) => {
  const absensi = new Absensi({
   tanggal:req.body.tanggal,
-  'jam':req.body.jam,
+  jam:req.body.jam,
   'absensi':req.body.absensi,
   nim:req.body.nim,
   nama:req.body.nama,
@@ -65,7 +65,7 @@ exports.update = (req, res) => {
  const id = req.params.id;
  const absensi2 ={
   tanggal:req.body.tanggal,
-  'jam':req.body.jam,
+  jam:req.body.jam,
   'absensi':req.body.absensi,
   nim:req.body.nim,
   nama:req.body.nama,
