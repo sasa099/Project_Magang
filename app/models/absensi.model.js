@@ -9,6 +9,7 @@ module.exports = (mongoose) => {
             type: Schema.Types.ObjectId,
             ref:'datamhs',
          },
+         keterangan: String,
        }],
         // nim:String,
         // nama:String,
