@@ -203,7 +203,7 @@ exports.laporan = (req, res) => {
 
     {
       $group: {
-        _id: "$_id",
+        _id: "$_id", 
         kehadiran: { $sum: 1 },
         id_kelas: { $first: "$id_kelas" },
         id_matakuliah: { $first: "$id_matakuliah" },
