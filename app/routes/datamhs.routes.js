@@ -46,7 +46,9 @@ module.exports = (app) => {
      router.get("/:id", datamhs.findOne);
      
      router.put("/:id", upload.any(), datamhs.update);
-     
+
+     router.get("/findbykelas", datamhs.findByKelas);
+
      router.delete("/:id", datamhs.delete);
      
      app.use("/api/datamhs", router);

@@ -12,6 +12,7 @@ module.exports = (app) => {
     router.put("/:id", kelas.update);
     
     router.delete("/:id", kelas.delete);
+
     
     app.use("/api/kelas", router);
    };
