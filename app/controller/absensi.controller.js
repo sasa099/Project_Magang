@@ -19,6 +19,10 @@ exports.create = (req, res) => {
   });
 
   // Save Absensi in the database
+  Absensi.find({
+    'absensi': req.body.absensi,
+  }).then((data) => {
+    if (!data[0]) {
   absensi
     .save(absensi)
     .then((data) => {
@@ -29,7 +33,15 @@ exports.create = (req, res) => {
         message: err.message || "Some error occurred while creating the Absensi.",
       });
     });
-};
+      } else {
+        res.status(412).send({ message: "Mahasiswa " + req.body.absensi + " Telah Terdaftar" });
+      }
+    }).catch((err) => {
+      res.status(500).send({
+        message: err.message || "Some error occurred while retrieving.",
+      });
+    });
+  };
 
 exports.findAll = (req, res) => {
   const nama = req.query.nama;
