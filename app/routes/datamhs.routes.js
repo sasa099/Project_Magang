@@ -47,7 +47,9 @@ module.exports = (app) => {
      
      router.put("/:id", upload.any(), datamhs.update);
 
-     router.get("/findbykelas", datamhs.findByKelas);
+     //router.get("/findByNim", datamhs.findByNim);
+
+     router.get("/findByKelas", datamhs.findByKelas);
 
      router.delete("/:id", datamhs.delete);
      

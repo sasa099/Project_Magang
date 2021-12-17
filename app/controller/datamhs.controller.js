@@ -178,4 +178,25 @@ exports.findByKelas = (req, res) => {
 
       });
     });
+
+    exports.findByNim = (req, res) => {
+      Datamhs.find(
+        {
+          $match:
+          {
+            id_nim: req.query.nim,
+          }
+        }
+      )
+        .then((data) => {
+          res.send(data);
+        })
+    
+        .catch((err) => {
+          res.status(500).send({
+            message: err.message || "Some error occurred while retrieving.",
+    
+          });
+        });
+};
 };
