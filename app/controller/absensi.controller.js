@@ -49,7 +49,7 @@ exports.findAll = (req, res) => {
     ? { nama: { $regex: new RegExp(nama), $options: "i" } }
     : {};
 
-  Absensi.find(condition).populate('id_kelas').populate('id_matakuliah').populate('id_ruang').populate('id_datamhs')
+  Absensi.find(condition).populate('id_kelas').populate('id_matakuliah').populate('id_ruang').populate({path:'absensi',populate:{path:'id_datamhs'}})
     .then((data) => {
       res.send(data);
     })
@@ -220,7 +220,7 @@ exports.laporan = (req, res) => {
         id_kelas: { $first: "$id_kelas" },
         id_matakuliah: { $first: "$id_matakuliah" },
         tanggal: { $first: "$tanggal" },
-        absensi: { $first: "$absensi" },
+        absensi: { $first: "$absensi.id_datamhs" },
         jam: { $first: "$jam" },
         jumlah: { $first: "$jumlah" },
       },
@@ -249,6 +249,14 @@ exports.laporan = (req, res) => {
       },
 
     },
+    // {
+    //   $lookup: {
+    //     from: "datamhs",
+    //     localField: "id_datamhs",
+    //     foreignField: "_id",
+    //     as: "id_datamhs"
+    //   }
+    // }, 
     {
       $lookup: {
         from: "kelas",
