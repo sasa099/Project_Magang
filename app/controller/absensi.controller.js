@@ -220,7 +220,8 @@ exports.laporan = (req, res) => {
         id_kelas: { $first: "$id_kelas" },
         id_matakuliah: { $first: "$id_matakuliah" },
         tanggal: { $first: "$tanggal" },
-        absensi: { $first: "$absensi.id_datamhs" },
+        mahasiswa: { $first: "$absensi.id_datamhs" },
+        keterangan:{$first: "$absensi.keterangan"},
         jam: { $first: "$jam" },
         jumlah: { $first: "$jumlah" },
       },
@@ -230,12 +231,12 @@ exports.laporan = (req, res) => {
         _id: 1,
         id_kelas: 1,
         id_matakuliah: 1,
-        absensi: 1,
         mahasiswa: 1,
         tanggal: 1,
         jumlah: 1,
         data: 1,
         kehadiran: 1,
+        keterangan:1,
         jam: 1,
         percent: {
           $floor: {
@@ -249,14 +250,14 @@ exports.laporan = (req, res) => {
       },
 
     },
-    // {
-    //   $lookup: {
-    //     from: "datamhs",
-    //     localField: "id_datamhs",
-    //     foreignField: "_id",
-    //     as: "id_datamhs"
-    //   }
-    // }, 
+    {
+      $lookup: {
+        from: "datamhs",
+        localField: "mahasiswa",
+        foreignField: "_id",
+        as: "mahasiswa"
+      }
+    }, 
     {
       $lookup: {
         from: "kelas",
