@@ -1,5 +1,6 @@
-const db = require("../models");
+const db= require("../models");
 const Absensi = db.absensi;
+var app = require('mongoose');
 
 exports.create = (req, res) => {
   const absensi = new Absensi({
@@ -127,12 +128,13 @@ exports.delete = (req, res) => {
 };
 
 exports.detail = (req, res) => {
-  if (req.query.kelas && req.query.matakuliah && req.query.datamhs) {
+ // if (req.query.kelas && req.query.matakuliah && req.query.datamhs) {
     Absensi.aggregate([
       {
         $match: {
           id_kelas: mongoose.Types.ObjectId(req.query.kelas),
-          id_matakuliah: mongoose.Types.ObjectId(req.query.matakuliah)
+          id_matakuliah: mongoose.Types.ObjectId(req.query.matakuliah),
+          id_datamhs: mongoose.Types.ObjectId(req.query.datamhs)
         }
       },
       {
@@ -144,11 +146,15 @@ exports.detail = (req, res) => {
           kelas: { $first: "$id_kelas" },
           jumlah: { $sum: 1 },
         }
+      }, {
+        $match: {
+          "_id.id_datamhs": mongoose.Types.ObjectId(req.query.datamhs),
+        }
       },
       {
         $project: {
           total: "$jumlah",
-          percent: { $multiply: [{ $divide: ["$jumlah", "$jumlah"] }, 100] },
+         // percent: { $multiply: [{ $divide: ["$jumlah", "$jumlah"] }, 100] },
         }
       },
     ]).then((data) => {
@@ -157,6 +163,7 @@ exports.detail = (req, res) => {
           $match: {
             id_kelas: mongoose.Types.ObjectId(req.query.kelas),
             id_matakuliah: mongoose.Types.ObjectId(req.query.matakuliah),
+            id_datamhs: mongoose.Types.ObjectId(req.query.datamhs)
           }
         },
         {
@@ -186,7 +193,7 @@ exports.detail = (req, res) => {
     });
 
   }
-}
+
 
 exports.laporan = (req, res) => {
   Absensi.aggregate([

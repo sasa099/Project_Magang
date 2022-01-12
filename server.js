@@ -3,7 +3,9 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const db = require("./app/models");
 const app = express();
- 
+
+const jwt = require('jsonwebtoken')
+
 var corsOptions = {
    origin: "*",
 };
@@ -39,6 +41,7 @@ app.get("/", (req, res) => {
        message: "Selamat datang di matakuliah workshop pemrograman framework",
    });
 });
+
 require("./app/routes/kelas.routes")(app);
 require("./app/routes/matkul.routes")(app);
 require("./app/routes/prodi.routes")(app);
@@ -46,6 +49,7 @@ require("./app/routes/ruangan.routes")(app);
 require("./app/routes/absensi.routes")(app);
 require("./app/routes/datamhs.routes")(app);
 require("./app/routes/kehadiran.routes")(app);
+require("./app/routes/user.routes")(app);
 const PORT = process.env.PORT || 8081;
 app.listen(PORT, () => {
    console.log(`Server backend port ${PORT}.`);

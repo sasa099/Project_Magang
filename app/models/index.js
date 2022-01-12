@@ -13,4 +13,6 @@ db.ruangan = require("./ruangan.model.js")(mongoose);
 db.absensi = require("./absensi.model.js")(mongoose);
 db.datamhs = require("./datamhs.model.js")(mongoose);
 db.kehadiran = require("./kehadiran.model.js")(mongoose);
+db.user = require("./user.model.js")(mongoose);
+
 module.exports = db;
