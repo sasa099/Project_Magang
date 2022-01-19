@@ -1,6 +1,7 @@
 const {verifySignUp} = require("../middlewares");
-const controller = require("../controllers/auth.controller");
+const controller = require("../controller/user.controller");
 const middlewareWrapper = require("cors");
+const authJwt = require("../middlewares/authJwt");
 
 module.exports = function(app) {
     app.use(function(req, res, next) {
@@ -12,7 +13,7 @@ module.exports = function(app) {
     });
   
     app.post("/api/auth/signup",
-        [verifySignUp.checkDuplicateUsernameOrEmail],
+        [authJwt.checkDuplicateUsernameOrEmail],
       controller.signup
     );
   

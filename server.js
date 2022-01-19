@@ -49,7 +49,7 @@ require("./app/routes/ruangan.routes")(app);
 require("./app/routes/absensi.routes")(app);
 require("./app/routes/datamhs.routes")(app);
 require("./app/routes/kehadiran.routes")(app);
-//require("./app/routes/auth.routes")(app);
+require("./app/routes/auth.routes")(app);
 require("./app/routes/user.routes")(app);
 const PORT = process.env.PORT || 8081;
 app.listen(PORT, () => {
