@@ -26,7 +26,7 @@ exports.signup = (req, res) => {
 
 exports.signin = (req, res) => {
     User.findOne({
-        username: req.body.username,
+        email: req.body.email,
     }).exec((err, user) => {
         if (err) {
             res.status(500).send({ message: err });
@@ -37,7 +37,7 @@ exports.signin = (req, res) => {
         }
 
         var passwordIsValid = bcrypt.compareSync(
-            req.body.password, user.password
+            req.body.password,user.password
         );
 
         if (!passwordIsValid) {
