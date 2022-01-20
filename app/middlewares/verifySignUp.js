@@ -1,22 +1,38 @@
-const jwt = require('jsonwebtoken');
-const config = require("../auth.config.js")
 const db = require("../models");
 const User = db.user;
 
-verifyToken = (req, res, next)=> {
-    let token = req.headers['x-access-token'];
-
-    if(!token){
-        return res.status(403).send({message: "No Token Provided!"});
-    }
-
-    jwt.verify(token, config.secret, (err, decoded) =>{
-        if(err){
-            return res.status(401).send({message: "Unauthorized!"});
+checkDuplicateFirstnameOrEmail = (req, res, next) => {
+    User.findOne({
+        firstname:req.body.firstname,
+    }).exec((err, user) => {
+        if (err) {
+            res.status(500).send({ message: err });
+            return;
         }
-        req.userId = decoded.id;
-        next();
+        if (user) {
+            res.status(400).send({
+                message: "Username Sudah Pernah Terdaftar",
+            });
+            return;
+        }
+
+        User.findOne({
+            email: req.body.email,
+        }).exec((err, user) => {
+            if (err) {
+                res.status(500).send({ message: err });
+                return;
+            }
+            if (user) {
+                res.status(400).send({
+                    message: "Email Sudah Pernah Terdaftar",
+                });
+                return;
+            }
+
+            next();
+        });
     });
-};
-const authJwt = {verifyToken}
-module.exports = authJwt;
+}
+const verifySignUp = { checkDuplicateFirstnameOrEmail };
+module.exports = verifySignUp;

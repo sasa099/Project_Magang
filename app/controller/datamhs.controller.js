@@ -24,34 +24,38 @@ exports.create = (req, res) => {
     kecamatan: req.body.kecamatan,
     id_kelas: req.body.id_kelas,
     foto: req.files[0].filename,
-
   });
 
   // Save Datamhs in the database
   Datamhs.find({
     nim: req.body.nim,
-  }).then((data) => {
-    if (!data[0]) {
-      datamhs
-        .save(datamhs)
-        .then((data) => {
-          res.send(data);
-        })
-        .catch((err) => {
-          res.status(500).send({
-            message: err.message || "Some error occurred while creating the Datamhs.",
+  })
+    .then((data) => {
+      if (!data[0]) {
+        datamhs
+          .save(datamhs)
+          .then((data) => {
+            res.send(data);
+          })
+          .catch((err) => {
+            res.status(500).send({
+              message:
+                err.message ||
+                "Some error occurred while creating the Datamhs.",
+            });
           });
-        });
-    } else {
-      res.status(412).send({ message: "Nim " + req.body.nim + " Telah Terdaftar" });
-    }
-  }).catch((err) => {
-    res.status(500).send({
-      message: err.message || "Some error occurred while retrieving.",
+      } else {
+        res
+          .status(412)
+          .send({ message: "Nim " + req.body.nim + " Telah Terdaftar" });
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: err.message || "Some error occurred while retrieving.",
+      });
     });
-  });
 };
-
 
 exports.findAll = (req, res) => {
   const nama = req.query.nama;
@@ -59,7 +63,9 @@ exports.findAll = (req, res) => {
     ? { nama: { $regex: new RegExp(nama), $options: "i" } }
     : {};
 
-  Datamhs.find(condition).populate('id_kelas').populate('id_prodi')
+  Datamhs.find(condition)
+    .populate("id_kelas")
+    .populate("id_prodi")
     .then((data) => {
       res.send(data);
     })
@@ -73,7 +79,9 @@ exports.findAll = (req, res) => {
 exports.findOne = (req, res) => {
   const id = req.params.id;
 
-  Datamhs.findById(id).populate('id_prodi').populate('id_kelas')
+  Datamhs.findById(id)
+    .populate("id_prodi")
+    .populate("id_kelas")
     .then((data) => {
       if (!data) res.status(404).send({ message: "Not found with id " + id });
       else res.send(data);
@@ -109,29 +117,33 @@ exports.update = (req, res) => {
   };
   Datamhs.find({
     nim: req.body.nim,
-  }).then((data) => {
-    if (!data[0]) {
-      Datamhs.findByIdAndUpdate(id, datamhs2, { useFindAndModify: false })
-        .then((data) => {
-          if (!data) {
-            res.status(404).send({
-              message: `Cannot update Datamhs with id=${id}. Maybe Datamhs was not found!`,
+  })
+    .then((data) => {
+      if (!data[0]) {
+        Datamhs.findByIdAndUpdate(id, datamhs2, { useFindAndModify: false })
+          .then((data) => {
+            if (!data) {
+              res.status(404).send({
+                message: `Cannot update Datamhs with id=${id}. Maybe Datamhs was not found!`,
+              });
+            } else res.send({ message: "Datamhs was updated successfully." });
+          })
+          .catch((err) => {
+            res.status(500).send({
+              message: "Error updating Datamhs with id=" + id,
             });
-          } else res.send({ message: "Datamhs was updated successfully." });
-        })
-        .catch((err) => {
-          res.status(500).send({
-            message: "Error updating Datamhs with id=" + id,
           });
-        });
-    } else {
-      res.status(412).send({ message: "Nim " + req.body.nim + " Telah Terdaftar" });
-    }
-  }).catch((err) => {
-    res.status(500).send({
-      message: err.message || "Some error occurred while retrieving.",
+      } else {
+        res
+          .status(412)
+          .send({ message: "Nim " + req.body.nim + " Telah Terdaftar" });
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: err.message || "Some error occurred while retrieving.",
+      });
     });
-  });
 };
 exports.delete = (req, res) => {
   const id = req.params.id;
@@ -155,18 +167,14 @@ exports.delete = (req, res) => {
     });
 };
 
-exports.deleteAll = (req, res) => { };
+exports.deleteAll = (req, res) => {};
 
-exports.findAllPublished = (req, res) => { };
+exports.findAllPublished = (req, res) => {};
 
 exports.findByKelas = (req, res) => {
-  Datamhs.find(
-    {
-      $match:
-      {
-        id_kelas: req.query.kelas,
-      }
-    }
+  Datamhs.find({
+      id_kelas: req.query.kelas
+  }
   )
     .then((data) => {
       res.send(data);
@@ -175,28 +183,22 @@ exports.findByKelas = (req, res) => {
     .catch((err) => {
       res.status(500).send({
         message: err.message || "Some error occurred while retrieving.",
-
       });
     });
-
-    exports.findByNim = (req, res) => {
-      Datamhs.find(
-        {
-          $match:
-          {
-            id_nim: req.query.nim,
-          }
-        }
-      )
-        .then((data) => {
-          res.send(data);
-        })
-    
-        .catch((err) => {
-          res.status(500).send({
-            message: err.message || "Some error occurred while retrieving.",
-    
-          });
-        });
 };
+exports.findByNim = (req, res) => {
+  Datamhs.find({
+    $match: {
+      id_nim: req.query.nim,
+    },
+  })
+    .then((data) => {
+      res.send(data);
+    })
+
+    .catch((err) => {
+      res.status(500).send({
+        message: err.message || "Some error occurred while retrieving.",
+      });
+    });
 };

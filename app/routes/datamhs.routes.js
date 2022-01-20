@@ -43,7 +43,7 @@ module.exports = (app) => {
  
      router.get("/", datamhs.findAll);
      
-     router.get("/:id", datamhs.findOne);
+     router.get("/find/:id", datamhs.findOne);
      
      router.put("/:id", upload.any(), datamhs.update);
 
