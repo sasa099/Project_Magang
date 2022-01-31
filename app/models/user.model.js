@@ -9,6 +9,6 @@ module.exports = (mongoose) => {
     }, {
         timestamps: true
     });
-    const User = mongoose.model("user", UserSchema);
+    const User = mongoose.model("user",UserSchema);
     return User;
 }
