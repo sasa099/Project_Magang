@@ -62,13 +62,16 @@ exports.findOne = (req, res) => {
 };
  
 exports.update = (req, res) => {
- const id = req.params.id;
+  const id = req.params.id;
+  const prodi2 ={
+  nama_prodi:req.body.nama_prodi,
+ };
  
  Prodi.find({
   nama_prodi:req.body.nama_prodi,
 }).then((data)=>{console.log(data[0]);
  if(!data[0]){
- Prodi.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
+ Prodi.findByIdAndUpdate(id, prodi2, { useFindAndModify: false })
    .then((data) => {
      if (!data) {
        res.status(404).send({
